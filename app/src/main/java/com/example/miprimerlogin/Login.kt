@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,10 +26,19 @@ class Login : AppCompatActivity() {
             val activityRecuperar = Intent(this, RecuperarPassword::class.java)
             startActivity(activityRecuperar)
         }
-
         registrarse.setOnClickListener {
             val activityRgistro = Intent(this, CrearCuenta::class.java)
             startActivity(activityRgistro)
+        }
+        ingresar.setOnClickListener {
+            if (usuario.text.toString().isEmpty() || password.text.toString().isEmpty()) {
+                Toast.makeText(this, "Se requiere el usuario y la contraseña", Toast.LENGTH_SHORT).show()
+            } else if (usuario.text.toString() == "admin" && password.text.toString() == "1234") {
+                Toast.makeText(this, "Bienvenido al sistema", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Usuario y contraseña incorrecto", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
